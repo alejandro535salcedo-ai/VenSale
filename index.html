@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventas · Multi usuario</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <!-- Estilos -->
+    <link rel="stylesheet" href="style.css">
+    <!-- jsPDF y AutoTable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <!-- Mapa de importaciones para bcryptjs -->
+    <script type="importmap">
+        {
+            "imports": {
+                "bcryptjs": "https://cdn.skypack.dev/bcryptjs"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="app">
+        <div id="toast-container"></div>
+
+        <!-- Pantalla de login / registro -->
+        <div id="auth-container" class="auth-container">
+            <div class="auth-card">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>VenSales</span>
+                </div>
+                <div id="login-form" class="auth-form">
+                    <h2>Acceder</h2>
+                    <input type="text" id="login-username" placeholder="Usuario" autocomplete="off">
+                    <input type="password" id="login-password" placeholder="Contraseña">
+                    <button id="login-btn">Iniciar sesión</button>
+                    <p class="auth-switch">¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
+                </div>
+                <div id="register-form" class="auth-form" style="display: none;">
+                    <h2>Crear cuenta</h2>
+                    <input type="text" id="reg-username" placeholder="Usuario">
+                    <input type="password" id="reg-password" placeholder="Contraseña">
+                    <input type="password" id="reg-confirm" placeholder="Confirmar contraseña">
+                    <button id="register-btn">Registrarse</button>
+                    <p class="auth-switch"><a href="#" id="show-login">← Volver a acceso</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aplicación principal (visible con sesión) -->
+        <div id="main-app" style="display: none;">
+            <aside class="sidebar">
+                <div class="sidebar-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>VenSales</span>
+                </div>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li data-view="dashboard" class="active"><i class="fas fa-home"></i> <span>Dashboard</span></li>
+                        <li data-view="products"><i class="fas fa-box"></i> <span>Productos</span></li>
+                        <li data-view="clients"><i class="fas fa-users"></i> <span>Clientes</span></li>
+                        <li data-view="sales"><i class="fas fa-cart-shopping"></i> <span>Ventas</span></li>
+                        <li data-view="exchange"><i class="fas fa-dollar-sign"></i> <span>Tasa BCV</span></li>
+                    </ul>
+                </nav>
+                <div class="sidebar-footer">
+                    <div class="user-info">
+                        <i class="fas fa-user-circle"></i> <span id="current-user"></span>
+                    </div>
+                    <!-- Botón de modo oscuro -->
+                    <button id="theme-toggle" class="theme-btn">
+                        <i class="fas fa-moon"></i> <span>Modo oscuro</span>
+                    </button>
+                    <button id="logout-btn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</button>
+                </div>
+            </aside>
+            <main class="main-content">
+                <div id="view-container"></div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Módulo principal -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
